@@ -1,15 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div class="warpper">
+      <NodeList class="col" v-if="fileds" :input-data="fileds" v-model="data"/>
+      <div class="col show-object">{{ data }}</div>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NodeList from './components/NodeList.vue'
+import { getList } from './service/getNodeList'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: { NodeList },
+  data () {
+    return {
+      data: '',
+      fileds: null
+    }
+  },
+  watch: {
+    data (newValue) {
+      this.fileds = newValue
+    }
+  },
+  async mounted () {
+    this.fileds = await getList()
+    this.fileds.forEach((element, index) => {
+      element.id = index
+      element.value = ''
+    })
   }
 }
 </script>
@@ -22,5 +43,23 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.warpper{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.col{
+  max-width: 210px;
+  width: 100%;
+}
+
+.show-object{
+  white-space: pre;
+  text-align: left;
+  font-weight: 700;
 }
 </style>

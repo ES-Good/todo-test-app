@@ -1,0 +1,18 @@
+[
+  {
+    "group": "Group name 1",
+    "name": "Label1"
+  },
+  {
+    "group": "Group name 1",
+    "name": "Label2"
+  },
+  {
+    "group": "Group name 2",
+    "name": "Label1"
+  },
+  {
+    "group": "Group name 2",
+    "name": "Label2"
+  }
+]
